@@ -8,12 +8,13 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 
 @Configuration
 public class StudentConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(StudentRespository){
+    CommandLineRunner commandLineRunner(StudentRespository repository) {
         return args -> {
             Student mariam = new Student(
                 "Mariam",
@@ -28,6 +29,9 @@ public class StudentConfig {
                     21
             );
 
+            repository.saveAll(
+                    List.of(mariam, alex)
+            );
 
         };
     }
