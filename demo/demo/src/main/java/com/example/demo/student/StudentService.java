@@ -12,14 +12,26 @@ import java.util.List;
 public class StudentService {
 
 
-    private final StudentRespository studentRespository;
+    private final StudentRepository studentRepository;
 
     @Autowired
-    public StudentService(StudentRespository studentRespository) {
-        this.studentRespository = studentRespository;
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
     }
 
     public List<Student> getStudents() {
-        return studentRespository.findAll();
+        return studentRepository.findAll();
+    }
+
+    public Student addStudent(Student student) {
+        return studentRepository.save(student);
+    }
+
+    public boolean deleteStudent(Long id) {
+        if (studentRepository.existsById(id)) {
+            studentRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
